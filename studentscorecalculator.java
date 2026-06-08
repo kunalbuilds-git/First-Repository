@@ -8,9 +8,8 @@ Display Result: display marks obtained, avg pecentage and the grade obtained by 
 */
 
 
-import java.util.Scanner;
-
-public class studentscorecalculator {
+import java.util.Scanner; 
+public class studentScoreCalculator {
     public static void main(String[] args){
         Scanner scan = new Scanner(System.in);
         
