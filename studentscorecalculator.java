@@ -1,13 +1,3 @@
-/* 
-*** PROBLEM STATEMENT ***
-Input: Takes marks obtained in each sbject (ou of 100).
-Calculate the total marks: Sum up all the marks entered for every subject;
-Calculate the avg pecentage : divide the sum of the marks entered by the total actual marks * 100 - to get the avg percentage 
-Grade Calculation : Assign the grades according to the marks obtained 
-Display Result: display marks obtained, avg pecentage and the grade obtained by the student
-*/
-
-
 import java.util.Scanner; 
 public class studentScoreCalculator {
     public static void main(String[] args){
