@@ -1,5 +1,5 @@
 //setting class named account 
-class Account{
+public class Account{
     String accountHolderName;
     int accountNumber;
     double balance;
@@ -42,8 +42,6 @@ class Account{
         Account currentAccount = new Account("Rahul", 678901, 200.00);
         currentAccount.displayBalance();
 
-        currentAccount.withdraw(201);
-
-        
+        currentAccount.withdraw(201);        
     }
 }
