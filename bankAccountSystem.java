@@ -1,47 +1,73 @@
 //setting class named account 
-public class Account{
-    String accountHolderName;
-    int accountNumber;
-    double balance;
+public class bankAccountSystem{
+    //setting the fields private
+    private String accountHolderName;
+    private int accountNumber;
+    private double balance;
 
     //Constructor to initialize all fields
-    Account(String name, int accountNo, double accountbalance){
+    bankAccountSystem(String name, int accountNo, double accountbalance){
         this.accountHolderName = name;
         this.accountNumber = accountNo;
-        this.balance = accountbalance;
+        if(accountbalance >= 0) {
+            this.balance = accountbalance;
+        }
+        else{
+            System.out.println("Invalid balance ammount!! Defaulting the balance to $0.0");
+            this.balance = 0.0;
+        }
     }
-
     void deposit(double amount){
-        this.balance = this.balance + amount;
-        System.out.println("Amount deposited successfully: $" + amount);
+        if(amount >= 0 ) {
+            this.balance = this.balance + amount;
+            System.out.println("Amount deposited successfully: $" + amount);
+        }
+        else{
+            System.out.println("Rejected!! You cannot deposite negative or zero amount.");
+        }        
     }
 
     void withdraw(double amount){
-        if (amount <= balance){
+        if(amount <= 0) {
+            System.out.println("Rejected!! You cannot withdraw negative or zero amount of money.");
+        }
+        else if (amount <= balance) {
             this.balance = this.balance - amount;
             System.out.println("Amount withdrew Successfully: $" + amount);
         }
         else{
             System.out.println("Transaction denied! Insufficient funds for withdrawal.");
-        }
-               
+        }           
     }
 
     void displayBalance(){
         System.out.println("Your Current account balance is: $" + this.balance);
     }
 
+    //getter for account holder name
+    public String getaccountHolderName(){
+        return this.accountHolderName;
+    }
+
+    //getter for balance
+    public double getBalance() {
+        return this.balance;
+    }
+
     public static void main(String[] args){
-        Account savingsAccount = new Account ("Kunal", 12345, 10009.00);
+        bankAccountSystem savingsAccount = new bankAccountSystem ("Kunal", 12345, 10009.00);
         savingsAccount.displayBalance();
 
         savingsAccount.deposit(2000000.00);
         savingsAccount.withdraw(2345.98);
         savingsAccount.displayBalance();
 
-        Account currentAccount = new Account("Rahul", 678901, 200.00);
+        bankAccountSystem currentAccount = new bankAccountSystem("Rahul", 678901, 200.00);
         currentAccount.displayBalance();
 
-        currentAccount.withdraw(201);        
+        currentAccount.withdraw(201);
+        
+        currentAccount.withdraw(-999);
+        currentAccount.deposit(0);
     }
 }
