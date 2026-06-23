@@ -12,7 +12,6 @@ public class bankAccountSystem {
         
         // Validate and assign accountType
         setAccountType(type);
-
         if (accountbalance >= 0) {
             this.balance = accountbalance;
         } else {
