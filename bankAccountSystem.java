@@ -3,7 +3,7 @@ public class bankAccountSystem {
     private String accountHolderName;
     private int accountNumber;
     private double balance;
-    private String accountType; // --> [ADDED] For Day 55 Upgrade
+    private String accountType; 
 
     // 2. [UPDATE] Constructor to initialize all fields including accountType
     bankAccountSystem(String name, int accountNo, double accountbalance, String type) {
