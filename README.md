@@ -1,33 +1,32 @@
-# My Java Practice Journey 🚀
+Java Programming Repository
+This repository contains my hands-on Java projects, covering Object-Oriented Programming (OOP) fundamentals, data structures, and logic challenges.
 
-Welcome to my central repository for Java OOPs, DSA foundations, and practical programming challenges.
+Project 1: Bank Account System
+A console-based banking application that simulates real-world account management, deposits, and withdrawals across multiple account types.
 
----
+Key Concepts Applied:
+Inheritance & Polymorphism: Built a base Account class extended by specific SavingsAccount and CurrentAccount child classes to handle unique behaviors.
 
-## 🏦 Project 1: Bank Account System (Day 53)
-A secure console application simulating banking workflows with robust input handling.
+Encapsulation: Marked sensitive fields like balance and accountHolderName as private, protecting them from direct outside modification.
 
-### 🧠 Key Concepts Used
-- **Encapsulation:** All sensitive fields (`balance`, `accountHolderName`) are marked `private` to restrict unauthorized access.
-- **Data Validation:** Active gatekeeping prevents negative initial balances, negative deposits, or faulty overdrafts.
-- **Getters & Setters:** Safe, public gatekeeper methods handle internal state changes cleanly.
+Method Overriding: Customized the display and withdrawal logic specifically for each account type (such as handling overdraft limits for current accounts).
 
-### 🚀 Features Included
-- Automated rejection tags for negative investments.
-- Real-time balance updates printed upon successful transaction routing.
+Constructor Chaining: Used the super() keyword to pass initialization data from child classes back to the parent class constructor smoothly.
 
----
+Features:
+Validation rules that reject negative deposits or invalid transaction amounts.
 
-## 🧮 Project 2: Student Score Calculator
-A practical utility class designed to parse student metrics and compute grade milestones.
+Overdraft protection logic allowing current accounts to maintain a negative balance down to a set limit.
 
----
+Automatic interest calculation and deposits for savings accounts.
 
-## 🔄 Project 3: Palindrome Checker
-A performance-focused string processing tool that evaluates characters sequentially to verify symmetry.
+Project 2: Student Score Calculator
+A utility class designed to process student grades, calculate averages, and assign milestone marks based on academic metrics.
 
----
+Project 3: Palindrome Checker
+A string processing utility that checks whether a word or phrase reads the same backward as forward by evaluating characters from both ends.
 
-## 📈 Future System Roadmap
-- Move each standalone task into its own neat project sub-folder.
-- Add dynamic menu selections using `java.util.Scanner` for the banking system.
+Next Steps & Roadmap
+Organize the repository by moving standalone tasks into dedicated project sub-folders.
+
+Implement an interactive CLI menu in the banking system using java.util.Scanner.
