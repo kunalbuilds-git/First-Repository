@@ -1,16 +1,18 @@
+package Bank;
 //creating another class/file for accounts - savings and Current
 public class SavingsAccount extends Account {
-    double interestRate;
+    private double interestRate;
 
     public SavingsAccount(String accountHolderName, int accountNumber, double balance, double interestRate) {
         super(accountHolderName, accountNumber, balance);
         this.interestRate = interestRate;
     }
-    //making method for savings account
+    //making METHOD for savings account
     @Override
     public void displayAccountDetails() {
         super.displayAccountDetails();
-        System.out.println("Account Type: Saving " + "Interest Rate: " + this.interestRate + "%");
+        System.out.println("Account Type: Saving ");
+        System.out.println(" Interest Rate: " + this.interestRate + "%");
         System.out.println("==============================================================");
     }
 

@@ -1,9 +1,10 @@
+package Bank;
 public class bankAccountSystem {
-    // 1. Setting the fields private
-    private String accountHolderName;
-    private int accountNumber;
-    private double balance;
-    private String accountType; 
+    // 1. Setting the fields protected
+    protected String accountHolderName;
+    protected int accountNumber;
+    protected double balance;
+    protected String accountType; 
 
     // 2. [UPDATE] Constructor to initialize all fields including accountType
     bankAccountSystem(String name, int accountNo, double accountbalance, String type) {
@@ -76,20 +77,25 @@ public class bankAccountSystem {
     }
 
     public static void main(String[] args) {
-        // Testing with the new accountType parameter
-        bankAccountSystem savingsAccount = new bankAccountSystem("Kunal", 12345, 10009.00, "Savings");
-        savingsAccount.displayAccountDetails();
+        //1. create a savings account
+        SavingsAccount savings = new SavingsAccount("Kunal", 1234, 1000.0, 5.0);
 
-        savingsAccount.deposit(20000.00);
-        savingsAccount.withdraw(2345.98);
-        savingsAccount.displayAccountDetails();
+        //2. create a current account 
+        CurrentAccount current = new CurrentAccount("Kunal", 5678, 500.0, 1000.0);
 
-        bankAccountSystem currentAccount = new bankAccountSystem("Rahul", 678901, 200.00, "Current");
-        currentAccount.displayAccountDetails();
+        //3. test saving account
+        System.out.println("---Testing Savings Account---");
+        savings.displayAccountDetails();
+        savings.addInterest();
+        savings.displayAccountDetails();
 
-        // Testing error validations
-        currentAccount.withdraw(201);
-        currentAccount.withdraw(-999);
-        currentAccount.deposit(0);
+        //4. test current account
+        System.out.println("\n---Testing Current Account---");
+        current.displayAccountDetails();
+        current.withdraw(400);
+        current.displayAccountDetails();
+        current.withdraw(800);
+        current.displayAccountDetails();
+
     }
 }
