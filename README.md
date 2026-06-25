@@ -1,32 +1,92 @@
-Java Programming Repository
-This repository contains my hands-on Java projects, covering Object-Oriented Programming (OOP) fundamentals, data structures, and logic challenges.
+# Java Programming Repository
 
-Project 1: Bank Account System
-A console-based banking application that simulates real-world account management, deposits, and withdrawals across multiple account types.
+This repository contains my Java practice projects and problem-solving exercises while learning core programming concepts, Object-Oriented Programming (OOP), and basic application logic.
 
-Key Concepts Applied:
-Inheritance & Polymorphism: Built a base Account class extended by specific SavingsAccount and CurrentAccount child classes to handle unique behaviors.
+---
 
-Encapsulation: Marked sensitive fields like balance and accountHolderName as private, protecting them from direct outside modification.
+## Tech Stack
 
-Method Overriding: Customized the display and withdrawal logic specifically for each account type (such as handling overdraft limits for current accounts).
+* Java
+* OOP Concepts
+* Console-Based Applications
 
-Constructor Chaining: Used the super() keyword to pass initialization data from child classes back to the parent class constructor smoothly.
+---
 
-Features:
-Validation rules that reject negative deposits or invalid transaction amounts.
+# Projects
 
-Overdraft protection logic allowing current accounts to maintain a negative balance down to a set limit.
+## 1. Bank Account System
 
-Automatic interest calculation and deposits for savings accounts.
+A console-based banking system that simulates basic real-world banking operations like creating accounts, depositing money, withdrawing funds, and managing different account types.
 
-Project 2: Student Score Calculator
-A utility class designed to process student grades, calculate averages, and assign milestone marks based on academic metrics.
+### Concepts Used
 
-Project 3: Palindrome Checker
-A string processing utility that checks whether a word or phrase reads the same backward as forward by evaluating characters from both ends.
+* Inheritance
+* Polymorphism
+* Encapsulation
+* Constructor Chaining
+* Method Overriding
 
-Next Steps & Roadmap
-Organize the repository by moving standalone tasks into dedicated project sub-folders.
+### Features
 
-Implement an interactive CLI menu in the banking system using java.util.Scanner.
+* Separate `SavingsAccount` and `CurrentAccount` classes
+* Deposit and withdrawal validation
+* Overdraft limit handling for current accounts
+* Interest calculation for savings accounts
+* Secure private fields for account data
+
+### What I Learned
+
+* How parent and child classes work together
+* Writing reusable code using OOP
+* Handling real-world logic with Java classes and methods
+
+---
+
+## 2. Student Score Calculator
+
+A simple Java utility that calculates student averages and performance based on marks entered by the user.
+
+### Features
+
+* Average score calculation
+* Grade evaluation logic
+* Basic input handling and calculations
+
+### What I Learned
+
+* Conditional statements
+* Methods and reusable logic
+* Working with numerical operations in Java
+
+---
+
+## 3. Palindrome Checker
+
+A small string-based project that checks whether a word or phrase is a palindrome.
+
+### Features
+
+* Character comparison from both ends
+* String processing logic
+* Case-insensitive checking
+
+### What I Learned
+
+* String manipulation in Java
+* Loops and conditional logic
+* Problem-solving approach
+
+---
+
+# Next Goals
+
+* Organize projects into separate folders
+* Add an interactive CLI menu using `Scanner`
+* Start learning basic Data Structures in Java
+* Build larger Java mini-projects
+
+---
+
+## Repository Purpose
+
+This repository mainly tracks my learning journey and practical implementation of Java concepts through small projects and exercises.
