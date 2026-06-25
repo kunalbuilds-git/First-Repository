@@ -12,7 +12,7 @@ public class SavingsAccount extends Account {
     public void displayAccountDetails() {
         super.displayAccountDetails();
         System.out.println("Account Type: Saving ");
-        System.out.println(" Interest Rate: " + this.interestRate + "%");
+        System.out.println("Interest Rate: " + this.interestRate + "%");
         System.out.println("==============================================================");
     }
 
