@@ -13,24 +13,30 @@ public class CurrentAccount extends Account {
     //Creating method to Current Account Details
     @Override
     public void displayAccountDetails(){
+        System.out.println("\n===================================================");
+        System.out.println("               ACCOUNT INFORMATION                 ");
+        System.out.println("===================================================");
         super.displayAccountDetails();
-        System.out.println("Account Type: Current Account.");
-        System.out.println("Your overdraft limit is: $" + this.overdraftLimit);
+        System.out.println("Account Type   : Current Account");
+        System.out.println("Overdraft Limit: $" + this.overdraftLimit);
         System.out.println("===================================================");
     }
 
     //Creating method for withdrawing money
     @Override
     public void withdraw(double amount){
+        System.out.println("\n--- Processing Withdrawal: $" + amount + " ---");
         if(amount <= 0){
-            System.out.println("Rejected! You cannot withdraw negative or zero amount of money.");
+            System.out.println("[REJECTED] Amount must be greater than zero.");
         }
         else if( amount <= (balance + overdraftLimit)) {
             this.balance = this.balance - amount;
-            System.out.println("Amount withdrawn Successfully: $" + amount);
+            System.out.println("[SUCCESS]  Money withdrawn successfully.");
+            System.out.println("[BALANCE]  Remaining Balance: $" + this.balance);
         }
         else{
-            System.out.println("Transaction denied! Overdraft limit exceeded.");
+            System.out.println("[DENIED]   Transaction failed! Overdraft limit exceeded.");
         }
+        System.out.println("---------------------------------------------------");
     }
 }
