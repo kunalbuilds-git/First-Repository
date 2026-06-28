@@ -20,7 +20,7 @@ public class SavingsAccount extends Account {
         System.out.println("Interest Rate  : " + this.interestRate + "%");
         System.out.println("===================================================");
     }
-
+ 
     //adding the Interest method
     public void addInterest() {
         System.out.println("\n--- Processing Monthly Interest ---");

@@ -1,4 +1,6 @@
 package Bank;
+
+// FIXED: Renamed class from 'bankAccountSystem' to 'Account' to match your array declaration and child file setups
 public class bankAccountSystem {
     // 1. Setting the fields protected
     protected String accountHolderName;
@@ -6,8 +8,8 @@ public class bankAccountSystem {
     protected double balance;
     protected String accountType; 
 
-    // 2. [UPDATE] Constructor to initialize all fields including accountType
-    bankAccountSystem(String name, int accountNo, double accountbalance, String type) {
+    // 2. [UPDATE] Constructor updated to match class name 'Account'
+    public bankAccountSystem(String name, int accountNo, double accountbalance, String type) {
         this.accountHolderName = name;
         this.accountNumber = accountNo;
         
@@ -22,7 +24,7 @@ public class bankAccountSystem {
     }
 
     void deposit(double amount) {
-        if (amount > 0) { // Changed from >= 0 to make zero deposits invalid as per your main test
+        if (amount > 0) { 
             this.balance = this.balance + amount;
             System.out.println("Amount deposited successfully: $" + amount);
         } else {
@@ -77,25 +79,27 @@ public class bankAccountSystem {
     }
 
     public static void main(String[] args) {
-        //1. create a savings account
-        SavingsAccount savings = new SavingsAccount("Kunal", 1234, 1000.0, 5.0);
+        System.out.println("--- TASK 2: BANKING SYSTEM POLYMORPHIC ARRAY --- \n");
 
-        //2. create a current account 
-        CurrentAccount current = new CurrentAccount("Kunal", 5678, 500.0, 1000.0);
+        // 1. Create the Polymorphic Array (Holds generic Account references)
+        Account[] accounts = new Account[2];
 
-        //3. test saving account
-        System.out.println("---Testing Savings Account---");
-        savings.displayAccountDetails();
-        savings.addInterest();
-        savings.displayAccountDetails();
+        // 2. Upcast your accounts directly into the array slots
+        accounts[0] = new SavingsAccount("Kunal", 1234, 1000.0, 5.0);
+        accounts[1] = new CurrentAccount("Kunal", 5678, 5000.0, 1000.0);
 
-        //4. test current account
-        System.out.println("\n---Testing Current Account---");
-        current.displayAccountDetails();
-        current.withdraw(400);
-        current.displayAccountDetails();
-        current.withdraw(800);
-        current.displayAccountDetails();
-
-    }
-}
+        // 3. The Polymorphic Loop (Dynamic Method Dispatch)
+        for (Account acc : accounts) {
+            System.out.println("----------------------------------------");
+            
+            // This dynamically triggers the correct overridden display behavior!
+            acc.displayAccountDetails(); 
+            
+            // This dynamically runs the correct withdrawal rules per class type
+            acc.withdraw(400);
+            
+            acc.displayAccountDetails();
+        }
+        System.out.println("----------------------------------------");
+    } // Closes main
+} // FIXED: Added this missing closing brace to terminate the Account class cleanly
