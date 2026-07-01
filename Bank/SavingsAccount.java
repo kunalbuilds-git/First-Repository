@@ -30,4 +30,10 @@ public class SavingsAccount extends Account {
         System.out.println("[BALANCE]  Updated Balance : $" + this.balance);
         System.out.println("---------------------------------------------------");
     }
+
+    //setting getter for interestRate
+    public double getInterestRate(){
+        return this.interestRate;
+    }
+
 }

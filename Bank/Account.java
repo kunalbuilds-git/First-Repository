@@ -5,6 +5,7 @@ public class Account {
     protected String accountHolderName;
     protected int accountNumber;
     protected double balance;
+    
 
     // 2. Main constructor - sets up name, number, and checks for negative starting balance
     public Account(String name, int accountNo, double accountbalance) {
@@ -51,7 +52,7 @@ public class Account {
     }
 
     // Getters for safely fetching data
-    public String getaccountHolderName() {
+    public String getAccountHolderName() {
         return this.accountHolderName;
     }
 

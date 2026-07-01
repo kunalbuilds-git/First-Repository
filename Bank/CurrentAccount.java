@@ -4,7 +4,7 @@ package Bank;
 public class CurrentAccount extends Account {
     private double overdraftLimit;
 
-    //Constructor taking 4 same arguments from the parent class 
+    //Constructor taking 3 same arguments from the parent class 
     public CurrentAccount(String accountHolderName, int accountNumber, double balance, double overdraftLimit) {
         super(accountHolderName, accountNumber, balance);
         this.overdraftLimit = overdraftLimit;
@@ -38,5 +38,10 @@ public class CurrentAccount extends Account {
             System.out.println("[DENIED]   Transaction failed! Overdraft limit exceeded.");
         }
         System.out.println("---------------------------------------------------");
+    }
+
+    //setting getter for the overdraftLimit
+    public double getOverdraftLimit() {
+        return this.overdraftLimit;
     }
 }
