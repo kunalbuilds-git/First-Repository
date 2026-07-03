@@ -1,6 +1,6 @@
 package Bank;
+import java.util.ArrayList;
 
-// FIXED: Renamed class from 'bankAccountSystem' to 'Account' to match your array declaration and child file setups
 public class bankAccountSystem {
     // 1. Setting the fields protected
     protected String accountHolderName;
@@ -8,12 +8,11 @@ public class bankAccountSystem {
     protected double balance;
     protected String accountType; 
 
-    // 2. [UPDATE] Constructor updated to match class name 'Account'
+    // Constructor
     public bankAccountSystem(String name, int accountNo, double accountbalance, String type) {
         this.accountHolderName = name;
         this.accountNumber = accountNo;
         
-        // Validate and assign accountType
         setAccountType(type);
         if (accountbalance >= 0) {
             this.balance = accountbalance;
@@ -29,7 +28,7 @@ public class bankAccountSystem {
             System.out.println("Amount deposited successfully: $" + amount);
         } else {
             System.out.println("Rejected!! You cannot deposit negative or zero amount.");
-        }        
+        }         
     }
 
     void withdraw(double amount) {
@@ -40,10 +39,9 @@ public class bankAccountSystem {
             System.out.println("Amount withdrew Successfully: $" + amount);
         } else {
             System.out.println("Transaction denied! Insufficient funds for withdrawal.");
-        }           
+        }            
     }
 
-    // 3. [NEW] Replaced displayBalance() with the structured displayAccountDetails()
     void displayAccountDetails() {
         System.out.println("\n═══════════════════════════════");
         System.out.println("Account Holder:  " + this.accountHolderName);
@@ -53,22 +51,18 @@ public class bankAccountSystem {
         System.out.println("═══════════════════════════════");
     }
 
-    // Getter for account holder name
     public String getaccountHolderName() {
         return this.accountHolderName;
     }
 
-    // Getter for balance
     public double getBalance() {
         return this.balance;
     }
 
-    // 4. [NEW] Getter for accountType
     public String getAccountType() {
         return this.accountType;
     }
 
-    // 5. [NEW] Setter for accountType with basic validation
     public void setAccountType(String type) {
         if (type.equalsIgnoreCase("Savings") || type.equalsIgnoreCase("Current")) {
             this.accountType = type;
@@ -81,25 +75,21 @@ public class bankAccountSystem {
     public static void main(String[] args) {
         System.out.println("--- TASK 2: BANKING SYSTEM POLYMORPHIC ARRAY --- \n");
 
-        // 1. Create the Polymorphic Array (Holds generic Account references)
-        Account[] accounts = new Account[2];
+        // 1. FIXED: Changed data type to bankAccountSystem to match file class name
+        ArrayList<bankAccountSystem> accounts = new ArrayList<>();
 
-        // 2. Upcast your accounts directly into the array slots
-        accounts[0] = new SavingsAccount("Kunal", 1234, 1000.0, 5.0);
-        accounts[1] = new CurrentAccount("Kunal", 5678, 5000.0, 1000.0);
+        // 2. FIXED: Keeps your dynamic polymorphic subclasses intact
+        accounts.add(new SavingsAccount("Kunal", 1234, 1000.0, 5.0));
+        accounts.add(new CurrentAccount("Kunal", 5678, 5000.0, 1000.0)); 
 
-        // 3. The Polymorphic Loop (Dynamic Method Dispatch)
-        for (Account acc : accounts) {
+        // 3. FIXED: Using bankAccountSystem reference for loop iteration
+        for (bankAccountSystem acc : accounts) {
             System.out.println("----------------------------------------");
             
-            // This dynamically triggers the correct overridden display behavior!
             acc.displayAccountDetails(); 
-            
-            // This dynamically runs the correct withdrawal rules per class type
             acc.withdraw(400);
-            
             acc.displayAccountDetails();
         }
         System.out.println("----------------------------------------");
     } // Closes main
-} 
+}

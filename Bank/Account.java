@@ -1,6 +1,6 @@
 package Bank;
 
-public class Account {
+public class Account implements Transaction{
     // 1. Core fields set to protected so child classes can use them directly
     protected String accountHolderName;
     protected int accountNumber;
@@ -15,8 +15,7 @@ public class Account {
         if (accountbalance >= 0) {
             this.balance = accountbalance;
         } else {
-            System.out.println("Invalid balance amount!! Defaulting the balance to $0.0");
-            this.balance = 0.0;
+            throw new IllegalArgumentException("Initial balance cannot be negative!");
         }
     }
 
@@ -26,19 +25,19 @@ public class Account {
             this.balance = this.balance + amount;
             System.out.println("Amount deposited successfully: $" + amount);
         } else {
-            System.out.println("Rejected!! You cannot deposit negative or zero amount.");
+           throw new IllegalArgumentException ("Deposit amount must be greater than zero");
         }        
     }
 
     // Standard withdraw method
     public void withdraw(double amount) {
         if (amount <= 0) {
-            System.out.println("Rejected!! You cannot withdraw negative or zero amount of money.");
+            throw new IllegalArgumentException("withdrawal amount must be greater than zero!");
         } else if (amount <= balance) {
             this.balance = this.balance - amount;
             System.out.println("Amount withdrew Successfully: $" + amount);
         } else {
-            System.out.println("Transaction denied! Insufficient funds for withdrawal.");
+            throw new IllegalArgumentException("Insufficient amountfor this withdrawal!");
         }           
     }
 
