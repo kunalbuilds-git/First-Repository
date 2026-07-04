@@ -1,5 +1,7 @@
 package Bank;
-import java.util.ArrayList; // Step 1: Imported the utility framework
+import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.Scanner; // Step 1: Imported the utility framework
 
 public class Account implements Transaction {
     // 1. Core fields set to protected so child classes can use them directly
@@ -63,28 +65,59 @@ public class Account implements Transaction {
     public static void main(String[] args) {
         System.out.println("--- BANKING SYSTEM POLYMORPHIC ARRAYLIST --- \n");
 
-        // 1. Declare a resizable ArrayList that manages references of type 'Account'
+        // Declare a resizable ArrayList that manages references of type 'Account'
         ArrayList<Account> accounts = new ArrayList<>();
 
-        // 2. Dynamically add your subclass objects to the list
-        accounts.add(new SavingsAccount("Kunal - Savings", 1234, 1000.0, 5.0));
-        accounts.add(new CurrentAccount("Kunal - Current", 5678, 5000.0, 1000.0)); 
+        Scanner sc = new Scanner(System.in);
 
-        // 3. Loop through dynamic list
-        for (Account acc : accounts) {
-            System.out.println("----------------------------------------");
-            
-            // Triggers overridden method behaviors dynamically
-            acc.displayAccountDetails(); 
-            
+        while(true) {
             try {
-                acc.withdraw(400);
-            } catch (IllegalArgumentException e) {
-                System.out.println("Error: " + e.getMessage());
+                System.out.println("\n---MAIN MENU---");
+                System.out.println("1. Create New Account");
+                System.out.println("2. Deposit Money");
+                System.out.println("3. Withdraw Money");
+                System.out.println("4. Display All Accounts");
+                System.out.println("5. Exit System");
+                System.out.println("Enter Your Choice (1-5): ");
+
+                int choice = sc.nextInt();
+                sc.nextLine(); //Clears enter key from the stream
+
+                if(choice == 5){
+                    System.out.println("Exiting System.... Goodbye!");
+                    break;
+                }
+
+                switch(choice){
+                    case 1:
+                        System.out.println("Enter Account Holder's Name: ");
+                        String name = sc.nextLine();
+
+                        System.out.println("Enter Your Unique Account Number: ");
+                        int accNum = sc.nextInt();
+
+                        System.out.println("Enter Initial Deposite Balance: ");
+                        Double initBalance = sc.nextDouble();
+                        sc.nextLine();
+
+                        //Instantiates and saves it inside your dynamic list!
+                        accounts.add(new Account(name, accNum, initBalance));
+                        System.out.println("Account opened and initial amount added Successfully!");
+                        break;
+
+                    case 2:
+                        
+
+                    default:
+                        System.out.print("Invalid Option!! Please choose a option between 1 to 5.");
+                }
             }
-            
-            acc.displayAccountDetails();
+
+            catch(InputMismatchException e){
+                System.out.println("ERROR: Invalid input type! Please enter numbers only.");
+                sc.nextLine(); //avoiding infite loop 
+            }
         }
-        System.out.println("----------------------------------------");
+        sc.close();        
     }
 }
