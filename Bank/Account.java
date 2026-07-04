@@ -106,10 +106,76 @@ public class Account implements Transaction {
                         break;
 
                     case 2:
+                        System.out.println("Enter the target Account Number for Deposit: ");
+                        int depositaccNum = sc.nextInt();
+
+                        System.out.print("Enter the amount to deposit: ");
+                        double depositAmt = sc.nextDouble();
+                        sc.nextLine(); //buffer clearing 
+
+                        Boolean depFound = false;
+
+                        // Loop through the dynamic list created 
+                        for (Account acc : accounts) {
+                            if (acc.accountNumber == depositaccNum) {
+                                try {
+                                    acc.deposit(depositAmt);
+                                } catch (IllegalArgumentException e) {
+                                    System.out.println("Error: " + e.getMessage());
+                                }
+                                depFound = true;
+                                break; 
+                            }
+                        }
                         
+                        if (!depFound) {
+                            System.out.println("Error: Account Number " + depositaccNum + " not found.");
+                        }
+                        break;
+
+                    case 3:
+                        System.out.println("Enter the target Account Number for withdrawal: ");
+                        int withdrawalaccNum = sc.nextInt();
+
+                        System.out.print("Enter the amount to withdraw: ");
+                        double withdrawalAmt = sc.nextDouble();
+                        sc.nextLine(); 
+
+                        Boolean witFound = false;
+
+                        // Loop through your list to find a structural field match
+                        for (Account acc : accounts) {
+                            if (acc.accountNumber == withdrawalaccNum) {
+                                try {
+                                    acc.withdraw(withdrawalAmt);
+                                } catch (IllegalArgumentException e) {
+                                    System.out.println("Error: " + e.getMessage());
+                                }
+                                witFound = true;
+                                break; 
+                            }
+                        }
+                        
+                        if (!witFound) {
+                            System.out.println("Error: Account Number " + withdrawalaccNum + " not found.");
+                        }
+                        break;
+
+                    case 4:
+                        if(accounts.isEmpty()){
+                            System.out.println("There is nothing in our inventory! No active accounts found.");
+                        }else{
+                            System.out.println("\n--PRINTING ALL THE ACCOUNTS---");
+                            for (Account acc: accounts) {
+                                acc.displayAccountDetails();
+                            }
+                        }
+                        break;
+
 
                     default:
                         System.out.print("Invalid Option!! Please choose a option between 1 to 5.");
+
                 }
             }
 
