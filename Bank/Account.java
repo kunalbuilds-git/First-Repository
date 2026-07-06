@@ -89,89 +89,22 @@ public class Account implements Transaction {
                 }
 
                 switch(choice){
+
                     case 1:
-                        System.out.println("Enter Account Holder's Name: ");
-                        String name = sc.nextLine();
-
-                        System.out.println("Enter Your Unique Account Number: ");
-                        int accNum = sc.nextInt();
-
-                        System.out.println("Enter Initial Deposite Balance: ");
-                        Double initBalance = sc.nextDouble();
-                        sc.nextLine();
-
-                        //Instantiates and saves it inside your dynamic list!
-                        accounts.add(new Account(name, accNum, initBalance));
-                        System.out.println("Account opened and initial amount added Successfully!");
+                        createAccount(sc, accounts);
                         break;
 
                     case 2:
-                        System.out.println("Enter the target Account Number for Deposit: ");
-                        int depositaccNum = sc.nextInt();
-
-                        System.out.print("Enter the amount to deposit: ");
-                        double depositAmt = sc.nextDouble();
-                        sc.nextLine(); //buffer clearing 
-
-                        Boolean depFound = false;
-
-                        // Loop through the dynamic list created 
-                        for (Account acc : accounts) {
-                            if (acc.accountNumber == depositaccNum) {
-                                try {
-                                    acc.deposit(depositAmt);
-                                } catch (IllegalArgumentException e) {
-                                    System.out.println("Error: " + e.getMessage());
-                                }
-                                depFound = true;
-                                break; 
-                            }
-                        }
-                        
-                        if (!depFound) {
-                            System.out.println("Error: Account Number " + depositaccNum + " not found.");
-                        }
+                        depositMoney(sc, accounts);
                         break;
 
                     case 3:
-                        System.out.println("Enter the target Account Number for withdrawal: ");
-                        int withdrawalaccNum = sc.nextInt();
-
-                        System.out.print("Enter the amount to withdraw: ");
-                        double withdrawalAmt = sc.nextDouble();
-                        sc.nextLine(); 
-
-                        Boolean witFound = false;
-
-                        // Loop through your list to find a structural field match
-                        for (Account acc : accounts) {
-                            if (acc.accountNumber == withdrawalaccNum) {
-                                try {
-                                    acc.withdraw(withdrawalAmt);
-                                } catch (IllegalArgumentException e) {
-                                    System.out.println("Error: " + e.getMessage());
-                                }
-                                witFound = true;
-                                break; 
-                            }
-                        }
-                        
-                        if (!witFound) {
-                            System.out.println("Error: Account Number " + withdrawalaccNum + " not found.");
-                        }
+                        withdrawMoney(sc, accounts);
                         break;
 
                     case 4:
-                        if(accounts.isEmpty()){
-                            System.out.println("There is nothing in our inventory! No active accounts found.");
-                        }else{
-                            System.out.println("\n--PRINTING ALL THE ACCOUNTS---");
-                            for (Account acc: accounts) {
-                                acc.displayAccountDetails();
-                            }
-                        }
+                        displayAccountDetails(accounts);
                         break;
-
 
                     default:
                         System.out.print("Invalid Option!! Please choose a option between 1 to 5.");
@@ -186,4 +119,99 @@ public class Account implements Transaction {
         }
         sc.close();        
     }
+    // --- HELPER METHODS FOR the cases created before in the main method ---
+
+    private static void showMenu() {
+        System.out.println("\n---MAIN MENU---");
+        System.out.println("1. Create New Account");
+        System.out.println("2. Deposit Money");
+        System.out.println("3. Withdraw Money");
+        System.out.println("4. Display All Accounts");
+        System.out.println("5. Exit System");
+        System.out.println("Enter Your Choice (1-5): ");
+    }
+    //Method for case 4 "Dispaly all accounts"
+    private static void displayAccountDetails(ArrayList<Account> accounts) {
+        if(accounts.isEmpty()){
+            System.out.println("There is nothing in our inventory! No active accounts.");
+        }else {
+            System.out.println("\n---PRINTING ALL THE ACCOUNTS---");
+                for (Account acc : accounts) {
+                    acc.displayAccountDetails();
+                }
+        }
+    }
+
+    //Method for case 1 "Create account"
+    private static void createAccount(Scanner sc, ArrayList<Account> accounts) {
+
+        System.out.println("Enter Account Holder's Name: ");
+        String name = sc.nextLine();
+
+        System.out.println("Enter Your Unique Account Number: ");
+        int accNum = sc.nextInt();
+
+        System.out.println("Enter Initial Deposite Balance: ");
+        Double initBalance = sc.nextDouble();
+        sc.nextLine();
+
+        //Instantiates and saves it inside your dynamic list!
+        accounts.add(new Account(name, accNum, initBalance));
+        System.out.println("Account opened and initial amount added Successfully!");
+    }
+
+    //Method for case 2 "Deposite Money"
+    private static void depositMoney(Scanner sc, ArrayList<Account> accounts){ 
+        System.out.println("Enter the target Account Number for Deposit: ");
+        int depositaccNum = sc.nextInt();
+
+        System.out.print("Enter the amount to deposit: ");
+        double depositAmt = sc.nextDouble();
+        sc.nextLine(); // buffer clearing
+
+        boolean depFound = false;
+        for (Account acc : accounts) {
+            if (acc.accountNumber == depositaccNum) {
+                try {
+                    acc.deposit(depositAmt);
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Error: " + e.getMessage());
+                }
+                depFound = true;
+                break;
+            }
+        }
+
+        if (!depFound) {
+            System.out.println("Error: Account Number " + depositaccNum + " not found.");
+        }
+    }
+
+    //Method for case 3 "Withdraw Money"
+    private static void withdrawMoney(Scanner sc, ArrayList<Account> accounts){ 
+        System.out.println("Enter the target Account Number for withdrawal: ");
+        int withdrawalaccNum = sc.nextInt();
+
+        System.out.print("Enter the amount to withdraw: ");
+        double withdrawalAmt = sc.nextDouble();
+        sc.nextLine(); // buffer clearing
+
+        boolean witFound = false;
+        for (Account acc : accounts) {
+            if (acc.accountNumber == withdrawalaccNum) {
+                try {
+                    acc.withdraw(withdrawalAmt);
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Error: " + e.getMessage());
+                }
+                witFound = true;
+                break;
+            }
+        }
+
+        if (!witFound) {
+            System.out.println("Error: Account Number " + withdrawalaccNum + " not found.");
+        }
+    }
+    
 }
