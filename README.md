@@ -1,92 +1,143 @@
 # Java Programming Repository
 
-This repository contains my Java practice projects and problem-solving exercises while learning core programming concepts, Object-Oriented Programming (OOP), and basic application logic.
+This repository contains my Java learning journey, practice projects, OOP implementations, and problem-solving exercises while exploring software engineering fundamentals.
+
+I started with core Java syntax and gradually evolved into building structured console-based applications using Object-Oriented Programming, collections, exception handling, and dynamic runtime logic.
 
 ---
 
-## Tech Stack
+# Tech Stack
 
 * Java
-* OOP Concepts
+* Object-Oriented Programming (OOP)
+* Collections Framework (`ArrayList`)
+* Exception Handling
 * Console-Based Applications
+* Git & GitHub
 
 ---
 
-# Projects
+# Main Project
 
-## 1. Bank Account System
+## 1. Banking Management System
 
-A console-based banking system that simulates basic real-world banking operations like creating accounts, depositing money, withdrawing funds, and managing different account types.
+A modular console-based banking application built while learning Java OOP and application architecture concepts.
 
-### Concepts Used
+The project evolved from a basic class structure into a dynamic menu-driven banking system capable of handling runtime user interaction and account management.
+
+---
+
+## Features
+
+### Account Management
+
+* Create new bank accounts dynamically
+* Separate `SavingsAccount` and `CurrentAccount` structures
+* Store accounts using `ArrayList`
+
+### Banking Operations
+
+* Deposit money
+* Withdraw money
+* Display all accounts
+* Search accounts using account numbers
+
+### OOP Concepts Implemented
 
 * Inheritance
 * Polymorphism
 * Encapsulation
 * Constructor Chaining
 * Method Overriding
+* Abstract Classes
+* Interfaces
 
-### Features
+### Runtime & System Features
 
-* Separate `SavingsAccount` and `CurrentAccount` classes
-* Deposit and withdrawal validation
-* Overdraft limit handling for current accounts
-* Interest calculation for savings accounts
-* Secure private fields for account data
+* Interactive CLI menu using `Scanner`
+* Dynamic Method Dispatch
+* Exception Handling using `try-catch`
+* Input validation
+* Empty inventory handling
+* Runtime account lookup logic
 
-### What I Learned
+### Development Workflow
 
-* How parent and child classes work together
-* Writing reusable code using OOP
-* Handling real-world logic with Java classes and methods
+* Git commits tracking architecture evolution
+* Continuous refactoring and code cleanup
+* Console output formatting improvements
 
 ---
 
+## Concepts Learned Through This Project
+
+* Designing modular Java applications
+* Structuring parent-child class relationships
+* Managing dynamic collections using `ArrayList`
+* Handling runtime exceptions safely
+* Building interactive software systems
+* Understanding real-world application flow
+* Refactoring large codebases into cleaner structures
+
+---
+
+# Additional Projects
+
 ## 2. Student Score Calculator
 
-A simple Java utility that calculates student averages and performance based on marks entered by the user.
+A simple Java utility that calculates student averages and evaluates academic performance.
 
 ### Features
 
 * Average score calculation
-* Grade evaluation logic
-* Basic input handling and calculations
+* Grade evaluation
+* User input handling
 
-### What I Learned
+### Concepts Practiced
 
-* Conditional statements
-* Methods and reusable logic
-* Working with numerical operations in Java
+* Conditional logic
+* Methods
+* Numerical operations
+* Basic program structure
 
 ---
 
 ## 3. Palindrome Checker
 
-A small string-based project that checks whether a word or phrase is a palindrome.
+A small string-based Java project that checks whether a word or phrase is a palindrome.
 
 ### Features
 
-* Character comparison from both ends
-* String processing logic
-* Case-insensitive checking
+* Case-insensitive palindrome checking
+* Character comparison logic
+* String traversal
 
-### What I Learned
+### Concepts Practiced
 
-* String manipulation in Java
-* Loops and conditional logic
-* Problem-solving approach
-
----
-
-# Next Goals
-
-* Organize projects into separate folders
-* Add an interactive CLI menu using `Scanner`
-* Start learning basic Data Structures in Java
-* Build larger Java mini-projects
+* String manipulation
+* Loops
+* Problem-solving techniques
 
 ---
 
-## Repository Purpose
+# Current Learning Focus
 
-This repository mainly tracks my learning journey and practical implementation of Java concepts through small projects and exercises.
+* Data Structures & Algorithms (DSA)
+* Collections Framework
+* File Handling
+* Cleaner Software Architecture
+* Problem Solving
+* Building Larger Java Applications
+
+---
+
+# Repository Purpose
+
+This repository serves as:
+
+* my coding practice archive
+* proof of consistent learning
+* a public log of my software engineering journey
+* a place to experiment with Java concepts and real application logic
+
+I actively update and improve projects as my understanding grows.
