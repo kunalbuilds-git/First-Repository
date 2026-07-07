@@ -78,7 +78,8 @@ public class Account implements Transaction {
                 System.out.println("3. Withdraw Money");
                 System.out.println("4. Display All Accounts");
                 System.out.println("5. Exit System");
-                System.out.println("Enter Your Choice (1-5): ");
+                System.out.println("6. Transfer Money");
+                System.out.println("Enter Your Choice (1-6): ");
 
                 int choice = sc.nextInt();
                 sc.nextLine(); //Clears enter key from the stream
@@ -106,8 +107,12 @@ public class Account implements Transaction {
                         displayAccountDetails(accounts);
                         break;
 
+                    case 6:
+                        transferMoney(sc, accounts);
+                        break;                      
+
                     default:
-                        System.out.print("Invalid Option!! Please choose a option between 1 to 5.");
+                        System.out.print("Invalid Option!! Please choose a option between 1 to 6.");
 
                 }
             }
@@ -128,7 +133,8 @@ public class Account implements Transaction {
         System.out.println("3. Withdraw Money");
         System.out.println("4. Display All Accounts");
         System.out.println("5. Exit System");
-        System.out.println("Enter Your Choice (1-5): ");
+        System.out.println("6. Transfer Money");
+        System.out.println("Enter Your Choice (1-6): ");
     }
     //Method for case 4 "Dispaly all accounts"
     private static void displayAccountDetails(ArrayList<Account> accounts) {
@@ -213,5 +219,63 @@ public class Account implements Transaction {
             System.out.println("Error: Account Number " + withdrawalaccNum + " not found.");
         }
     }
-    
+
+    //Method for "transfering money" case 6:
+    private  static void transferMoney(Scanner sc, ArrayList<Account> accounts) {
+        System.out.println("Enter sender's Account Number: ");
+        int senderAccNum = sc.nextInt();
+
+        System.out.println("Enter Receiver's Account Number: ");
+        int receiverAccNum = sc.nextInt();
+
+        System.out.println("Enter amount to transfer: ");
+        double transferAmt = sc.nextDouble();
+
+        //Loop to find sender's account and validate it
+        boolean senderFound = false;
+        Account senderAccount = null;
+
+        for (Account acc : accounts) {
+            if (acc.accountNumber == senderAccNum) {
+                senderAccount = acc; //stores teh account objects
+                senderFound = true;
+                break;
+            }
+        }
+
+        if (!senderFound) {
+                System.out.println("Error: Sender not found!");
+                return;
+        }
+
+        //loop for receiver's account and validate it if it is in our inventory
+        boolean receiverFound = false;
+        Account receiverAccount = null;
+
+        for (Account acc : accounts){
+            if(acc.accountNumber == receiverAccNum) {
+                receiverAccount = acc;
+                receiverFound = true;
+                break;
+            }
+        }
+
+        if(!receiverFound) {
+                System.out.println("Error: receiver not found!");
+                return;
+        }
+
+        if (transferAmt > senderAccount.getBalance()) {
+            System.out.println("Error: Insufficient balance. Available Amount: $" + senderAccount.getBalance());
+            return;
+        }
+
+        try {
+             senderAccount.withdraw(transferAmt);
+             receiverAccount.deposit(transferAmt);
+             System.out.println("Transfer Sucessful!");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());            
+        }
+    }
 }
