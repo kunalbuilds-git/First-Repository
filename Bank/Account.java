@@ -4,21 +4,25 @@ import java.util.InputMismatchException;
 import java.util.Scanner; // Step 1: Imported the utility framework
 
 public class Account implements Transaction {
-    // 1. Core fields set to protected so child classes can use them directly
+    //Core fields set to protected so child classes can use them directly
     protected String accountHolderName;
     protected int accountNumber;
     protected double balance;
+    private ArrayList<String> transactionHistory;
     
-    // 2. Main constructor - sets up name, number, and checks for negative starting balance
+    // Main constructor - sets up name, number, and checks for negative starting balance, transaction logs
     public Account(String name, int accountNo, double accountbalance) {
         this.accountHolderName = name;
         this.accountNumber = accountNo;
-        
         if (accountbalance >= 0) {
             this.balance = accountbalance;
         } else {
             throw new IllegalArgumentException("Initial balance cannot be negative!");
         }
+
+        //initializing transaction history 
+        this.transactionHistory = new ArrayList<>();
+        this.transactionHistory.add("Account was created with the initial balance of: $" + accountbalance);
     }
 
     // Standard deposit method
@@ -278,4 +282,23 @@ public class Account implements Transaction {
             System.out.println("Error: " + e.getMessage());            
         }
     }
+
+    //adding transactions method
+
+    public void addTransaction(String description) {
+        transactionHistory.add(description);
+    }
+
+    //Displaying that transsaction recorded
+    public void displayTransactionhistory() {
+        System.out.println("\n--- Transaction History for Account number: " + this.accountNumber + " ---");
+        if (transactionHistory.isEmpty()) {
+            System.out.println("No transactions performed yet!!");
+        } else {
+            for ( String transaction : transactionHistory) {
+                System.out.println(" -" + transaction);  
+            }
+        }
+    }
+
 }
