@@ -31,6 +31,7 @@ public class Account implements Transaction {
             this.balance = this.balance + amount;
             System.out.println("Amount deposited successfully: $" + amount);
             //modifying for deposite tracking log 
+            this.addTransaction(" [Deposit] $" + amount + " deposited Successfully.");
         } else {
            throw new IllegalArgumentException("Deposit amount must be greater than zero");
         }        
@@ -43,6 +44,8 @@ public class Account implements Transaction {
         } else if (amount <= balance) {
             this.balance = this.balance - amount;
             System.out.println("Amount withdrew Successfully: $" + amount);
+            //adding logging to this method
+            this.addTransaction(" [Withdraw] $" + amount + " withdrawn successfully");
         } else {
             throw new IllegalArgumentException("Insufficient amount for this withdrawal!");
         }           
@@ -84,7 +87,8 @@ public class Account implements Transaction {
                 System.out.println("4. Display All Accounts");
                 System.out.println("5. Exit System");
                 System.out.println("6. Transfer Money");
-                System.out.println("Enter Your Choice (1-6): ");
+                System.out.println("7. Transaction History");
+                System.out.println("Enter Your Choice (1-7): ");
 
                 int choice = sc.nextInt();
                 sc.nextLine(); //Clears enter key from the stream
@@ -116,8 +120,12 @@ public class Account implements Transaction {
                         transferMoney(sc, accounts);
                         break;                      
 
+                    case 7:
+                        viewTransactionhistory(sc, accounts);
+                        break;
+
                     default:
-                        System.out.print("Invalid Option!! Please choose a option between 1 to 6.");
+                        System.out.print("Invalid Option!! Please choose a option between 1 to 7.");
 
                 }
             }
@@ -139,7 +147,8 @@ public class Account implements Transaction {
         System.out.println("4. Display All Accounts");
         System.out.println("5. Exit System");
         System.out.println("6. Transfer Money");
-        System.out.println("Enter Your Choice (1-6): ");
+        System.out.println("7. Transaction History.");
+        System.out.println("Enter Your Choice (1-7): ");
     }
     //Method for case 4 "Dispaly all accounts"
     private static void displayAccountDetails(ArrayList<Account> accounts) {
@@ -278,6 +287,11 @@ public class Account implements Transaction {
         try {
              senderAccount.withdraw(transferAmt);
              receiverAccount.deposit(transferAmt);
+
+             //showing messages to for withdrawal and deposit
+            senderAccount.addTransaction(" [Transfer] " + transferAmt + ", Transferred to Account: " + receiverAccNum + ".");
+            receiverAccount.addTransaction(" [Transfer] Received: $" + transferAmt + ", from Account: " + senderAccNum + ".");
+
              System.out.println("Transfer Sucessful!");
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());            
@@ -290,7 +304,7 @@ public class Account implements Transaction {
         transactionHistory.add(description);
     }
 
-    //Displaying that transsaction recorded
+    //Displaying that transsaction history
     public void displayTransactionhistory() {
         System.out.println("\n--- Transaction History for Account number: " + this.accountNumber + " ---");
         if (transactionHistory.isEmpty()) {
@@ -301,5 +315,26 @@ public class Account implements Transaction {
             }
         }
     }
+
+    //Transaction History method
+    private static void viewTransactionhistory(Scanner sc, ArrayList<Account> accounts){
+        System.out.println("Enter the account number to check transaction history for: ");
+        int accNum = sc.nextInt();
+        sc.nextLine();
+        
+        boolean found = false;
+        for(Account acc : accounts){
+            if(acc.accountNumber == accNum){
+                System.out.println("\n---TRANSACTION HISTORY---");
+                acc.displayTransactionhistory();
+                found = true;
+                break;
+            }
+        }
+        
+        if(!found){
+                System.out.println("Error: Account Number " + accNum + " Not found!");
+        }
+    }   
 
 }
