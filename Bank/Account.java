@@ -30,6 +30,7 @@ public class Account implements Transaction {
         if (amount > 0) { 
             this.balance = this.balance + amount;
             System.out.println("Amount deposited successfully: $" + amount);
+            //modifying for deposite tracking log 
         } else {
            throw new IllegalArgumentException("Deposit amount must be greater than zero");
         }        
