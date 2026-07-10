@@ -189,21 +189,16 @@ public class Account implements Transaction {
         double depositAmt = sc.nextDouble();
         sc.nextLine(); // buffer clearing
 
-        boolean depFound = false;
-        for (Account acc : accounts) {
-            if (acc.accountNumber == depositaccNum) {
-                try {
-                    acc.deposit(depositAmt);
-                } catch (IllegalArgumentException e) {
-                    System.out.println("Error: " + e.getMessage());
-                }
-                depFound = true;
-                break;
+        Account account = findAccountByNumber(accounts, depositaccNum);
+        
+        if(account == null) {
+            System.out.println("Error: Account Number " + depositaccNum + " not found!");
+        } else {
+            try {
+                account.deposit(depositAmt);
+            } catch (IllegalArgumentException e) {
+                System.out.println("Error: " + e.getMessage());
             }
-        }
-
-        if (!depFound) {
-            System.out.println("Error: Account Number " + depositaccNum + " not found.");
         }
     }
 
@@ -216,21 +211,16 @@ public class Account implements Transaction {
         double withdrawalAmt = sc.nextDouble();
         sc.nextLine(); // buffer clearing
 
-        boolean witFound = false;
-        for (Account acc : accounts) {
-            if (acc.accountNumber == withdrawalaccNum) {
-                try {
-                    acc.withdraw(withdrawalAmt);
-                } catch (IllegalArgumentException e) {
-                    System.out.println("Error: " + e.getMessage());
-                }
-                witFound = true;
-                break;
-            }
-        }
+        Account account = findAccountByNumber(accounts, withdrawalaccNum);
 
-        if (!witFound) {
-            System.out.println("Error: Account Number " + withdrawalaccNum + " not found.");
+        if(account == null) {
+            System.out.println("Error: Account: " + withdrawalaccNum + "not found!");
+        } else {
+            try {
+                account.withdraw(withdrawalAmt);
+            } catch(IllegalArgumentException e) {
+                System.out.println("Error: "  + e.getMessage());
+            }
         }
     }
 
@@ -245,39 +235,22 @@ public class Account implements Transaction {
         System.out.println("Enter amount to transfer: ");
         double transferAmt = sc.nextDouble();
 
-        //Loop to find sender's account and validate it
-        boolean senderFound = false;
-        Account senderAccount = null;
+        //calling helper method for sender account number verification
 
-        for (Account acc : accounts) {
-            if (acc.accountNumber == senderAccNum) {
-                senderAccount = acc; //stores teh account objects
-                senderFound = true;
-                break;
-            }
-        }
+       Account senderAccount = findAccountByNumber(accounts, senderAccNum);
+       if(senderAccount == null) {
+        System.out.println("Error: Sender not found!!");
+        return;
+       } 
 
-        if (!senderFound) {
-                System.out.println("Error: Sender not found!");
-                return;
-        }
+       //calling helper method for receiver account number verification 
+       Account receiverAccount = findAccountByNumber(accounts, receiverAccNum);
 
-        //loop for receiver's account and validate it if it is in our inventory
-        boolean receiverFound = false;
-        Account receiverAccount = null;
-
-        for (Account acc : accounts){
-            if(acc.accountNumber == receiverAccNum) {
-                receiverAccount = acc;
-                receiverFound = true;
-                break;
-            }
-        }
-
-        if(!receiverFound) {
-                System.out.println("Error: receiver not found!");
-                return;
-        }
+       if( receiverAccount == null){
+        System.out.println("Error: Receiver not found!!");
+        return;
+       }
+       
 
         if (transferAmt > senderAccount.getBalance()) {
             System.out.println("Error: Insufficient balance. Available Amount: $" + senderAccount.getBalance());
@@ -322,19 +295,24 @@ public class Account implements Transaction {
         int accNum = sc.nextInt();
         sc.nextLine();
         
-        boolean found = false;
-        for(Account acc : accounts){
-            if(acc.accountNumber == accNum){
-                System.out.println("\n---TRANSACTION HISTORY---");
-                acc.displayTransactionhistory();
-                found = true;
-                break;
-            }
-        }
-        
-        if(!found){
-                System.out.println("Error: Account Number " + accNum + " Not found!");
+        Account account = findAccountByNumber(accounts, accNum);
+
+        if(account == null){
+            System.out.println("Error: Account Number: " + accNum + " not found!");            
+        } else{
+            System.out.println("\n---TRANSACTION HISTORY---");
+            account.displayTransactionhistory();
         }
     }   
+
+    //helper method to validate and fimd teh account number
+    private static Account findAccountByNumber(ArrayList<Account> accounts, int accountNumber){
+        for(Account acc : accounts){
+            if (acc.accountNumber == accountNumber) {
+                return acc; //returning the account object if found
+            }
+        }
+        return null; //returning null if not found
+    }
 
 }
